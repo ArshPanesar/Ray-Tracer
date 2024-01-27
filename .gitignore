@@ -1,0 +1,6 @@
+# Ignore Binaries
+/bin/
+
+# Ignore Library Files
+/include/
+/libraries/
