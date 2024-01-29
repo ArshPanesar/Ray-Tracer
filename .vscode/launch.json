@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "preLaunchTask": "Build with Premake",
+            "preLaunchTask": "Build with MakeFile",
             "type": "lldb",
             "request": "launch",
             "name": "Launch (Debug with lldb)",

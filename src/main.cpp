@@ -163,23 +163,32 @@ int main()
     // My Code
     RayTracer ray_tracer;
 
-
     // Create the image (RGB Array) to be displayed
-    const int width  = 8; // keep it in powers of 2!
-    const int height = 8; // keep it in powers of 2!
+    /*const int width  = 256; // keep it in powers of 2!
+    const int height = 256; // keep it in powers of 2!
     unsigned char image[width*height*3];
     for(int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
         {
             int idx = (i * width + j) * 3;
-            image[idx] = (unsigned char) (255 * i*j/height/width)  ; //((i+j) % 2) * 255;
-            image[idx+1] = 0;
-            image[idx+2] = 0;
+            // Red Value
+            image[idx] = (unsigned char)(255 * i*j/height/width)  ; //((i+j) % 2) * 255;
+            // Green Value
+            image[idx+1] = 50;
+            // Blue Value
+            image[idx+2] = 40;
         }
-    }
+    }*/
 
-    unsigned char *data = &image[0];
+    // Get Output Image
+    const Image& image = ray_tracer.get_output_image();
+    int width = image.get_width();
+    int height = image.get_height();
+    unsigned char *data = &image.get_raw_data()[0]; //&image[0]
+
+    // End of my Code
+
     if (data)
     {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);

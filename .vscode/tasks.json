@@ -12,6 +12,17 @@
                 "isDefault": true
             },
             "detail": "Task configured by user."
+        },
+        {
+            "type": "cppbuild",
+            "label": "Build with MakeFile",
+            "command": "make",
+            "args": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Task configured by user."
         }
     ],
     "version": "2.0.0"

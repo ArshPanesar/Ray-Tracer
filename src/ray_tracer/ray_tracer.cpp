@@ -1,16 +1,15 @@
 #include "ray_tracer.h"
 
 RayTracer::RayTracer() {
-
-    // Test Vector Stuff
-
-    Vector3 a(1.0f, 2.0f, 3.0f);
-
-    Vector3 b = a + a;
-
-    b.d_print();
+    
+    // Set Image
+    image.set_image(8, 8);
 }
 
 RayTracer::~RayTracer() {
-    // Nothing to do for now
+
+}
+
+const Image& RayTracer::get_output_image() const {
+    return image;
 }
