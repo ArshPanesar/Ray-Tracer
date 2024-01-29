@@ -5,11 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "preLaunchTask": "Clang++: Compile OpenGL Project",
+            "preLaunchTask": "Build with Premake",
             "type": "lldb",
             "request": "launch",
             "name": "Launch (Debug with lldb)",
-            "program": "${workspaceFolder}\\bin\\main.exe",
+            "program": "${workspaceFolder}\\bin\\Debug\\RayTracer.exe",
             "args": [],
             "cwd": "${workspaceFolder}"
         }

@@ -7,6 +7,8 @@
 
 #include <iostream>
 
+#include "ray_tracer/ray_tracer.h"
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 
@@ -157,6 +159,11 @@ int main()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
+
+    // My Code
+    RayTracer ray_tracer;
+
+
     // Create the image (RGB Array) to be displayed
     const int width  = 8; // keep it in powers of 2!
     const int height = 8; // keep it in powers of 2!
@@ -183,6 +190,8 @@ int main()
         std::cout << "Failed to load texture" << std::endl;
     }
    
+
+
 
 
     // render loop
