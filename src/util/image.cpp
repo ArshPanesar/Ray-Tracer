@@ -43,10 +43,10 @@ void Image::set_pixel(const int& x, const int& y, const Color& color) {
     if (x < 0 || x >= width || y < 0 || y >= height)
         return;
 
-    int id = (y * width + x);
+    int id = (y * width + x) * 3;
     pixel_array[id + 0] = color.r;
-    pixel_array[id + 1] = color.b;
-    pixel_array[id + 2] = color.g; 
+    pixel_array[id + 1] = color.g;
+    pixel_array[id + 2] = color.b;
 }
 
 const int Image::get_width() const {

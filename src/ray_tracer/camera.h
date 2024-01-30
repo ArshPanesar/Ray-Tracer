@@ -4,7 +4,7 @@
 class Camera {
 private:
 
-    // Center of the Camera's Window in World Coordinates
+    // Center of the Camera's Window in World Coordinates (Camera Basis)
     Vector3 center_position;
 
     // Distance of Viewpoint from Camera's Position: For Perspective Camera

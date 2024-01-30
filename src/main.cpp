@@ -181,6 +181,9 @@ int main()
         }
     }*/
 
+    // Run the Ray Tracer
+    ray_tracer.update();
+
     // Get Output Image
     const Image& image = ray_tracer.get_output_image();
     int width = image.get_width();

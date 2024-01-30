@@ -18,7 +18,7 @@ public:
     void set_image(const int& _width, const int& _height);
 
     // Set a Pixel's Intensity
-    // RBG from 0-255
+    // RGB from 0-255
     void set_pixel(const int& x, const int& y, const Color& color);
 
     // Getters

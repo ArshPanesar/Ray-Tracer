@@ -2,7 +2,7 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "Build with Premake",
+            "label": "Generate Makefile with Premake",
             "command": "premake5",
             "args": [
                 "gmake"
@@ -15,13 +15,17 @@
         },
         {
             "type": "cppbuild",
-            "label": "Build with MakeFile",
+            "label": "Build the Project's MakeFile",
             "command": "make",
             "args": [],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
+            
+            // Run this Task After Premake generates a Makefile
+            "dependsOn":["Generate Makefile with Premake"],
+            
             "detail": "Task configured by user."
         }
     ],
