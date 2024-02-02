@@ -21,4 +21,23 @@ public:
         g = _g;
         b = _b;
     }
+
+    void light_mix(const int& intensity) {
+        
+        if ((int)r + intensity > 255)
+            r = 255;
+        else
+            r += (unsigned char)intensity;
+        
+        if ((int)g + intensity > 255)
+            g = 255;
+        else
+            g += (unsigned char)intensity;
+        
+        if ((int)b + intensity > 255)
+            b = 255;
+        else
+            b += (unsigned char)intensity;
+        
+    }
 };

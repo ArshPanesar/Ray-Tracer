@@ -1,12 +1,9 @@
 #pragma once
-#include "../util/color.h"
+#include "shape.h"
 #include "../util/ray.h"
 
-class Sphere {
+class Sphere : public IShape {
 public:
-
-    // Center of the Sphere in World Coordinates
-    Vector3 center_position;
 
     // Radius
     float radius = 1.0f;

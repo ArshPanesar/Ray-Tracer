@@ -11,9 +11,18 @@ private:
     float viewpoint_distance;
 
     // Camera Window
-    //
-    // Width and Height of the Window: Should Be Kept Same as the Image
     Vector3 window_size;
+
+    // Width and Height of the Image
+    Vector3 image_size;
+
+public:
+    enum class ViewStyle {
+        ORTHOGRAPHIC = 0,
+        PERSPECTIVE
+    };
+
+    ViewStyle view_style;
 
 public:
 
@@ -25,7 +34,7 @@ public:
 
     // Set Viewing Window of the Camera (Top and Left should be in World Coordinates)
     // Keep Width and Height the same as the Output Image
-    void set_view(const float& width, const float& height);
+    void set_view(const float& image_width, const float& image_height, const float& window_width, const float& window_height);
 
     // Project a Ray into the World
     // Ray's Origin will be determined by Camera View: Perspective or Orthographic
