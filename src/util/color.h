@@ -26,16 +26,22 @@ public:
         
         if ((int)r + intensity > 255)
             r = 255;
+        else if ((int)r + intensity < 0)
+            r = 0;
         else
             r += (unsigned char)intensity;
         
         if ((int)g + intensity > 255)
             g = 255;
+        else if ((int)g + intensity < 0)
+            g = 0;
         else
             g += (unsigned char)intensity;
         
         if ((int)b + intensity > 255)
             b = 255;
+        else if ((int)b + intensity < 0)
+            b = 0;
         else
             b += (unsigned char)intensity;
         

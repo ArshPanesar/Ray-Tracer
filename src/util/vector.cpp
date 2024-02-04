@@ -77,7 +77,7 @@ Vector3 Vector3::normalized() const {
 
 // Debugging
 
-void Vector3::d_print(const std::string& label) {
+void Vector3::d_print(const std::string& label) const {
 
     std::string msg = "";
     if (!label.empty())

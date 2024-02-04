@@ -42,5 +42,5 @@ public:
     Vector3 normalized() const;
     
     // Debugging
-    void d_print(const std::string& label = "");
+    void d_print(const std::string& label = "") const;
 };

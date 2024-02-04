@@ -2,16 +2,14 @@
 #include "shape.h"
 #include "../util/ray.h"
 
-class Sphere : public IShape {
+class Plane : public IShape {
 public:
 
-    // Radius
-    float radius = 1.0f;
+    // Normal of the Plane
+    Vector3 normal;
 
 public:
-    Sphere();
-
-    // Check if a Ray Intersects this Sphere
+    // Check if a Ray Intersects this Plane
     // If Intersects, parameter t can be used to find the Intersection Point using the
     // Ray's Equation R(t) = p + dt 
     bool ray_intersects(const Ray& ray, float* t) const override;

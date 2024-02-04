@@ -16,4 +16,15 @@ public:
         float intensity = diffuse_coef * source.intensity * n_dot_v;
         return intensity;
     }
+
+    // float compute_specular_intensity(const LightSource& source, const IShape* shape, const Vector3 intersection_point, 
+    //                                 const Vector3 surface_normal, const float& specular_coef = 1.0f) {
+
+    //     asdl;
+    // }
+
+    float compute_ambient_intensity(const LightSource& source, const float& ambient_coef = 1.0f) {
+
+        return source.intensity * ambient_coef;
+    }
 };
