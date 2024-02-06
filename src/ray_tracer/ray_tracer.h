@@ -30,6 +30,9 @@ private:
     void draw_sphere(Sphere* sphere, const Ray& ray, const float& t, const int& x, const int& y);
     void draw_triangle(Triangle* triangle, const Ray& ray, const float& t, const int& x, const int& y);
 
+    // Count the Number of Shadows Falling at an Intersection Point of an Object
+    int count_shadows(IShape* object, const Vector3& intersection_point);
+
 public:
     RayTracer();
     ~RayTracer();

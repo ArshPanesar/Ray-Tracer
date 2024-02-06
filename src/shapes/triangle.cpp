@@ -10,7 +10,7 @@ void Triangle::compute_normal() {
     Vector3 p1p2 = p2 - p1;
     Vector3 p1p3 = p3 - p1;
 
-    normal = p1p2.cross(p1p3);
+    normal = p1p2.cross(p1p3).normalized();
 }
 
 bool Triangle::ray_intersects(const Ray& ray, float* t) const {

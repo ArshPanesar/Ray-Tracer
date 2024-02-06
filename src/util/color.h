@@ -22,28 +22,15 @@ public:
         b = _b;
     }
 
-    void light_mix(const int& intensity) {
+    void mix_light(const float& intensity) {
         
-        if ((int)r + intensity > 255)
-            r = 255;
-        else if ((int)r + intensity < 0)
-            r = 0;
-        else
-            r += (unsigned char)intensity;
-        
-        if ((int)g + intensity > 255)
-            g = 255;
-        else if ((int)g + intensity < 0)
-            g = 0;
-        else
-            g += (unsigned char)intensity;
-        
-        if ((int)b + intensity > 255)
-            b = 255;
-        else if ((int)b + intensity < 0)
-            b = 0;
-        else
-            b += (unsigned char)intensity;
-        
+        float new_r = (float)r * intensity;
+        r = (unsigned char)( (new_r > 255) ? 255 : ( (new_r < 0) ? 0 : new_r ) );
+
+        float new_g = (float)g * intensity;
+        g = (unsigned char)( (new_g > 255) ? 255 : ( (new_g < 0) ? 0 : new_g ) );
+
+        float new_b = (float)b * intensity;
+        b = (unsigned char)( (new_b > 255) ? 255 : ( (new_b < 0) ? 0 : new_b ) );           
     }
 };
