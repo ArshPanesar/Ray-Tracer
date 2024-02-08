@@ -18,7 +18,7 @@ project "RayTracer"
     libdirs { "libraries" }
 
     -- Had to rename libglfw3dll.a to liblibglfw3dll.a in libraries directory to avoid some linking error
-    links { "libglfw3dll", "glew32", "opengl32" }
+    links { "libglfw3dll", "glew32", "opengl32", "gdi32" }
 
     filter "configurations:Debug"
         defines { "DEBUG" }

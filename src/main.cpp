@@ -12,6 +12,8 @@
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 
+void draw_image(RayTracer& ray_tracer);
+
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 800;
@@ -114,10 +116,10 @@ int main()
     // ------------------------------------------------------------------
     float vertices[] = {
         // positions          // colors           // texture coords
-         0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-         0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-        -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-        -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
+         1.0f,  1.0f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+         1.0f, -1.0f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+        -1.0f, -1.0f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+        -1.0f,  1.0f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
     };
     unsigned int indices[] = {  
         0, 1, 3, // first triangle
@@ -163,47 +165,13 @@ int main()
     // My Code
     RayTracer ray_tracer;
 
-    // Create the image (RGB Array) to be displayed
-    /*const int width  = 256; // keep it in powers of 2!
-    const int height = 256; // keep it in powers of 2!
-    unsigned char image[width*height*3];
-    for(int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width; j++)
-        {
-            int idx = (i * width + j) * 3;
-            // Red Value
-            image[idx] = (unsigned char)(255 * i*j/height/width)  ; //((i+j) % 2) * 255;
-            // Green Value
-            image[idx+1] = 50;
-            // Blue Value
-            image[idx+2] = 40;
-        }
-    }*/
-
     // Run the Ray Tracer
     ray_tracer.update();
 
-    // Get Output Image
-    const Image& image = ray_tracer.get_output_image();
-    int width = image.get_width();
-    int height = image.get_height();
-    unsigned char *data = &image.get_raw_data()[0]; //&image[0]
-
-    // End of my Code
-
-    if (data)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        std::cout << "Failed to load texture" << std::endl;
-    }
+    draw_image(ray_tracer);
    
-
-
+    // Render Animation
+    ray_tracer.render_animation();
 
 
     // render loop
@@ -213,6 +181,17 @@ int main()
         // input
         // -----
         processInput(window);
+
+
+
+        // Camera View Switch: Orthographic and Perspective
+        if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
+            
+            ray_tracer.switch_camera_style();
+            ray_tracer.update();
+            draw_image(ray_tracer);
+        }
+
 
         // render
         // ------
@@ -262,3 +241,22 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     glViewport(0, 0, width, height);
 }
 
+void draw_image(RayTracer& ray_tracer) {
+
+    // Get Output Image
+    const Image& image = ray_tracer.get_output_image();
+    int width = image.get_width();
+    int height = image.get_height();
+    unsigned char *data = &image.get_raw_data()[0];
+
+    // Draw to Screen
+    if (data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
+    else
+    {
+        std::cout << "Failed to load texture" << std::endl;
+    }
+}
