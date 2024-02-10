@@ -1,13 +1,8 @@
 #include "vector.h"
 
-const Vector3 Vector3::X_AXIS = Vector3(1.0f, 0.0f, 0.0f);
-const Vector3 Vector3::Y_AXIS = Vector3(0.0f, 1.0f, 0.0f);
-const Vector3 Vector3::Z_AXIS = Vector3(0.0f, 0.0f, 1.0f);
-
-
 Vector3::Vector3() {
     
-    *this = X_AXIS;
+    *this = Vector3(0.0f, 0.0f, 0.0f);
 }
 
 Vector3::Vector3(const float& _x, const float& _y, const float& _z) {

@@ -9,15 +9,6 @@ public:
     float y;
     float z;
 
-    // Coordinate System Global Vectors
-    //
-    // X Axis: Positive on Right Side of Origin
-    static const Vector3 X_AXIS;
-    // Y Axis: Positive on Down Side of Origin (Flipped)
-    static const Vector3 Y_AXIS;
-    // Z Axis: Positive on Forward of Origin (Towards the Screen)
-    static const Vector3 Z_AXIS;
-
 public:
     
     Vector3(); // Initializes all Components to Zero

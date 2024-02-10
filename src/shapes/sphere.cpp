@@ -32,13 +32,6 @@ bool Sphere::ray_intersects(const Ray& ray, float* t) const {
     float t0 = numerator_plus / ray_dir_dot;
     float t1 = numerator_minus / ray_dir_dot;
 
-    // if (t0 > 0.0f) 
-    //     *t = t0;
-    // else if (t1 > 0.0f)
-    //     *t = t1;
-    // else
-    //     return false;
-
     float t_min = std::min(t0, t1);
     float t_max = std::max(t0, t1);
     

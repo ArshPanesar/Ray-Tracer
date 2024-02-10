@@ -17,9 +17,9 @@ bool Triangle::ray_intersects(const Ray& ray, float* t) const {
     // compute the plane's normal
     Vector3 p1p2 = p2 - p1;
     Vector3 p1p3 = p3 - p1;
+ 
     // no need to normalize
     Vector3 normal = p1p2.cross(p1p3); // N
-    float area2 = normal.magnitude();
  
     // Step 1: finding P
     
@@ -47,19 +47,19 @@ bool Triangle::ray_intersects(const Ray& ray, float* t) const {
     Vector3 edge1 = p2 - p1; 
     Vector3 vp1 = P - p1;
     C = edge1.cross(vp1);
-    if (normal.dot(C) < 0) return false; // P is on the right side
+    if (normal.dot(C) < 0) return false;
  
     // edge 2
     Vector3 edge2 = p3 - p2; 
     Vector3 vp2 = P - p2;
     C = edge2.cross(vp2);
-    if (normal.dot(C) < 0)  return false; // P is on the right side
+    if (normal.dot(C) < 0)  return false;
  
     // edge 3
     Vector3 edge3 = p1 - p3; 
     Vector3 vp3 = P - p3;
     C = edge3.cross(vp3);
-    if (normal.dot(C) < 0) return false; // P is on the right side;
+    if (normal.dot(C) < 0) return false;
 
     return true; // this ray hits the triangle
 }

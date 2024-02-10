@@ -171,7 +171,7 @@ int main()
     draw_image(ray_tracer);
    
     // Render Animation
-    ray_tracer.render_animation();
+    //ray_tracer.render_animation();
 
 
     // render loop

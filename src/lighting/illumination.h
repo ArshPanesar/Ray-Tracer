@@ -23,7 +23,7 @@ public:
         const LastRayHitRecord& last_hit_record = shape->last_hit_record;
 
         // Diffuse Shading
-        Vector3 v = (source.position - shape->center_position).normalized();
+        Vector3 v = (source.position - last_hit_record.intersection_point).normalized();
 
         float n_dot_v = last_hit_record.surface_normal.dot(v);
         float max_n_dot_v = std::max(0.0f, n_dot_v);

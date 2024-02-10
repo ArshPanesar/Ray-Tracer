@@ -7,7 +7,7 @@ RayTracer::RayTracer() {
     background_color = Color(100, 100, 100);
 
     // Set Camera
-    camera.set_center_position(Vector3(0.0f, 0.0f, 10.0f)); // (0.0f, -250.0f, 150.0f) WRONG HERE
+    camera.set_center_position(Vector3(0, 0, 200));
     camera.set_view((float)image.get_width(), (float)image.get_height(), 1024.0f, 1024.0f);
     camera.view_style = Camera::ViewStyle::PERSPECTIVE;
     
@@ -22,16 +22,16 @@ RayTracer::RayTracer() {
     triangle->compute_normal();
 
     triangle->color = Color(156, 181, 203);    
-    triangle->diffuse_coef = 1.0f;
+    triangle->diffuse_coef = 0.2f;
     triangle->ambient_coef = 1.0f;
-    triangle->specular_coef = 1.5f;
+    triangle->specular_coef = 0.2f;
 
 
     // Set Sphere 1
     objects_list.push_back( std::make_unique<Sphere>() );
     Sphere* sphere1 = (Sphere*)objects_list[objects_list.size() - 1].get();
 
-    sphere1->center_position = Vector3(-1000.0f, -425.0f, 1200.0f);
+    sphere1->center_position = Vector3(-300.0f, -425.0f, 1200.0f);
     sphere1->radius = 75.0f;
     sphere1->color = Color(124, 10, 2);
     sphere1->diffuse_coef = 1.0f;
@@ -41,7 +41,7 @@ RayTracer::RayTracer() {
     objects_list.push_back( std::make_unique<Sphere>() );
     Sphere* sphere2 = (Sphere*)objects_list[objects_list.size() - 1].get();
 
-    sphere2->center_position = Vector3(1000.0f, -400.0f, 1350.0f);
+    sphere2->center_position = Vector3(100.0f, -400.0f, 1350.0f);
     sphere2->radius = 100.0f;
     sphere2->diffuse_coef = 1.0f;
     sphere2->specular_coef = 3.0f;
@@ -85,7 +85,8 @@ RayTracer::RayTracer() {
     tetrahedron.set_up_triangles();
 
     // Set Camera Basis to Look at a Sphere
-    Vector3 camera_basis_w = (camera.get_center_position() - tetrahedron.top_point).normalized();
+    Vector3 camera_look_offset = Vector3(0.0f, 100.0f, 0.0f);
+    Vector3 camera_basis_w = (camera.get_center_position() - tetrahedron.top_point + camera_look_offset).normalized();
     camera.set_camera_basis(camera_basis_w);
 
     camera_basis_w.d_print("W");
@@ -340,8 +341,13 @@ void RayTracer::render_animation() {
 
     // Animating Camera Movement
     animation_data.camera_start_position = camera.get_center_position();
-    animation_data.camera_end_position = camera.get_center_position() + Vector3(0, -300, 300);
+    animation_data.camera_end_position = camera.get_center_position() + Vector3(0, 200, -100);
 
+    // Animating Spheres
+    float speed = 1500.0f;
+    Vector3 sphere1_move = Vector3(0, 0, 0);
+    Vector3 sphere2_move = Vector3(0, 0, 0);
+    
     int frame_count = animation_data.fps * animation_data.duration_sec;
 
     // Print Output
@@ -358,21 +364,33 @@ void RayTracer::render_animation() {
         Vector3 next_position(next_x, next_y, next_z);
         camera.set_center_position(next_position);
         
-        // Set Camera Basis to Look at a Tetrahedron
-        Vector3 camera_basis_w = (camera.get_center_position() - tetrahedron.top_point).normalized();
-        //camera.set_camera_basis(camera_basis_w);
+        // Compute Lerp Weight for Spheres 
+        float dt = 1.0f / (float)animation_data.fps;
+
+        // Compute Movement of Spheres
+        sphere1_move = objects_list[1]->center_position - Vector3(tetrahedron.top_point.x, objects_list[1]->center_position.y, tetrahedron.top_point.z);
+        sphere1_move = sphere1_move.cross(tetrahedron.top_point - Vector3(tetrahedron.top_point.x, 0.0f, tetrahedron.top_point.z));
+        sphere1_move = sphere1_move.normalized() * speed;
+
+        sphere2_move = objects_list[2]->center_position - Vector3(tetrahedron.top_point.x, objects_list[2]->center_position.y, tetrahedron.top_point.z);
+        sphere2_move = sphere1_move.cross(tetrahedron.top_point - Vector3(tetrahedron.top_point.x, 0.0f, tetrahedron.top_point.z));
+        sphere2_move = sphere1_move.normalized() * -speed;
 
         // Compute New Position of Sphere 1
-        next_x = lerp(animation_data.sphere1_start_position.x, animation_data.sphere1_end_position.x, t);
-        next_y = lerp(animation_data.sphere1_start_position.y, animation_data.sphere1_end_position.y, t);
-        next_z = lerp(animation_data.sphere1_start_position.z, animation_data.sphere1_end_position.z, t);
+        animation_data.sphere1_start_position = objects_list[1]->center_position;
+        animation_data.sphere1_end_position = animation_data.sphere1_start_position + sphere1_move;
+        next_x = lerp(animation_data.sphere1_start_position.x, animation_data.sphere1_end_position.x, dt);
+        next_y = lerp(animation_data.sphere1_start_position.y, animation_data.sphere1_end_position.y, dt);
+        next_z = lerp(animation_data.sphere1_start_position.z, animation_data.sphere1_end_position.z, dt);
 
         objects_list[1]->center_position = Vector3(next_x, next_y, next_z);
 
         // Compute New Position of Sphere 1
-        next_x = lerp(animation_data.sphere2_start_position.x, animation_data.sphere2_end_position.x, t);
-        next_y = lerp(animation_data.sphere2_start_position.y, animation_data.sphere2_end_position.y, t);
-        next_z = lerp(animation_data.sphere2_start_position.z, animation_data.sphere2_end_position.z, t);
+        animation_data.sphere2_start_position = objects_list[2]->center_position;
+        animation_data.sphere2_end_position = animation_data.sphere2_start_position + sphere2_move;
+        next_x = lerp(animation_data.sphere2_start_position.x, animation_data.sphere2_end_position.x, dt);
+        next_y = lerp(animation_data.sphere2_start_position.y, animation_data.sphere2_end_position.y, dt);
+        next_z = lerp(animation_data.sphere2_start_position.z, animation_data.sphere2_end_position.z, dt);
 
         objects_list[2]->center_position = Vector3(next_x, next_y, next_z);
         
