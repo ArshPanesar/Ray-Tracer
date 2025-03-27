@@ -43,5 +43,3 @@ To compile the project:
 [Make](https://gnuwin32.sourceforge.net/packages/make.htm) and [Premake5](https://premake.github.io/) are necessary to compile the project. You can try compiling with just Make, but if that does not work, running Premake first may be necessary. 
 
 The C++ compiler and linker can be changed to use **g++** and **gdb** linker instead, by editing these files: premake.lua, tasks.json and launch.json.  
-
-All libraries and include files are provided with the project.
