@@ -1,6 +1,21 @@
 
 # Ray Tracer
 
+This project was done as part of an assignment in a Computer Graphics course.
+
+## Results
+
+Floor and Shapes
+![floor-and-shapes](animations/0.png)
+
+Floor and Shapes (Different Camera Angle)
+![floor-and-shapes-diff-camera-angle](animations/150.png)
+
+
+Animation
+
+https://github.com/user-attachments/assets/eb839aef-afe1-4fd2-b7e7-cd8d19c7ea1a
+
 ## Platform and Libraries Used
 
 I have used the Windows operating system to build this project, alongwith the following technologies:
@@ -14,8 +29,6 @@ I have used the Windows operating system to build this project, alongwith the fo
 - **Make:** Premake acts as a makefile generator, and the project can be compiled by using the make package.
 
 - **CImg:** CImg is a C++ library to manipulate and save images on disk. This is used to create an animation with the Ray Tracer.
-
-- **Visual Studio Code:** This was used as an IDE to edit and run the project. The tasks.json and launch.json configuration files were used to automatically run premake5 and then using make to compile the project.
 
 ## Compiling Instructions
 
