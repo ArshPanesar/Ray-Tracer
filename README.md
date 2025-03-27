@@ -3,6 +3,19 @@
 
 This project was done as part of an assignment in a Computer Graphics course.
 
+## Results
+
+Floor and Shapes
+![floor-and-shapes](animations/0.png)
+
+Floor and Shapes (Different Camera Angle)
+![floor-and-shapes-diff-camera-angle](animations/150.png)
+
+
+Animation
+
+https://github.com/user-attachments/assets/eb839aef-afe1-4fd2-b7e7-cd8d19c7ea1a
+
 ## Platform and Libraries Used
 
 I have used the Windows operating system to build this project, alongwith the following technologies:
