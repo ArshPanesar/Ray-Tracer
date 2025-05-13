@@ -1,8 +1,6 @@
 
 # Ray Tracer
 
-This project was done as part of an assignment in a Computer Graphics course.
-
 ## Results
 
 Floor and Shapes
